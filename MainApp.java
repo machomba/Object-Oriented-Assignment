@@ -1,4 +1,4 @@
-//program to output "Salary calculations"
+//program to output "STUDENT GRADING"
 //Author: Ndibui Collins Machomba
 //Reg no: CT101/G/20306/23
 //Date: February 8,2024
@@ -7,52 +7,71 @@
 // Import the Scanner class for user input
 import java.util.Scanner;
 
-    class Employee {
-        String name;
-        double salary;
+// This class represents a student with a name and their marks
+class Student {
+    String name; // The name of the student
+    double marks; // The marks obtained by the student
 
-        // Constructor
-        public Employee(String name, double salary) {
-            this.name = name;
-            this.salary = salary;
-        }
-
-        // Method to display employee details
-        public void displayDetails() {
-            System.out.println("Employee Name: " + name);
-            System.out.println("Employee Salary: " + salary);
-        }
+    // Constructor to initialize student details
+    public Student(String name, double marks) {
+        this.name = name; // Initialize the name of the student
+        this.marks = marks; // Initialize the marks of the student
     }
 
-    class SalaryCalculator {
-        // Method to calculate bonus
-        public double calculateBonus(double salary) {
-            return salary * 0.1; // 10% bonus
+    // Method to display the student's details
+    public void displayDetails() {
+        System.out.println("Name: " + name); // Print out the student's name
+        System.out.println("Marks: " + marks); // Print out the student's marks
+    }
+}
+
+// This class handles the logic to calculate the student's grade
+class GradeCalculator {
+  
+    // Method that calculates the grade based on the marks received
+    public char calculateGrade(double marks) {
+        // If marks are 90 or above, return grade 'A'
+        if (marks >= 90) {
+            return 'A';
+        // If marks are between 75 and 89, return grade 'B'
+        } else if (marks >= 75) {  
+            return 'B';
+        // If marks are between 50 and 74, return grade 'C'
+        } else if (marks >= 50) { 
+            return 'C';
+        // If marks are below 50, return grade 'D'
+        } else {
+            return 'D';
         }
     }
+}
 
-    class MainApp {
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
+// The main class where our program starts executing
+public class MainApp {
+    public static void main(String[] args) {
+        // Create a scanner object to read input from the user
+        Scanner  scanner = new Scanner (System.in);
 
-            // Taking input from user
-            System.out.print("Enter employee name: ");
+        // Ask the user to enter the student's name
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine(); // Read the name input from the user
 
-            String name = scanner.nextLine();
+        // Ask the user to enter the student's marks
+        System.out.print("Enter student marks: ");
+        double marks = scanner.nextDouble(); // Read the marks input from the user
 
-            System.out.print("Enter employee salary: ");
-            double salary = scanner.nextDouble();
+        // Create a new Student object using the provided name and marks
+        Student student = new Student(name, marks);
 
-            // Creating objects
-            Employee employee = new Employee(name, salary);
-            SalaryCalculator calculator = new SalaryCalculator();
-            double bonus = calculator.calculateBonus(salary);
+        // Create an instance of GradeCalculator to determine the student's grade
+        GradeCalculator calculator = new GradeCalculator();
+        char grade = calculator.calculateGrade(marks); // Get the grade based on marks
 
-            // Displaying results
-            employee.displayDetails();
-            System.out.println("Bonus: " + bonus);
+        // Display the student's details and their calculated grade
+        student.displayDetails(); // Show student information
+        System.out.println("Grade: " + grade); // Show the calculated grade
 
-            // Closing scanner
-            scanner.close();
-        }
+        // Close the scanner to free up resources
+        scanner.close(); 
     }
+}
